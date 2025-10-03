@@ -1,0 +1,77 @@
+.title {
+  max-width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  text-align: center;
+  border-top: 3px solid lawngreen;
+  border-bottom: 3px solid lawngreen;
+}
+
+.project_card {
+  /* border: 2px solid lawngreen; */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  /* align-items: start; */
+  gap: 15px;
+}
+/* to stop text overflow */
+.project_card p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.image_wrapper2 {
+  position: relative;
+  width: 100%;
+  height: 200px; /* Adjust based on image size */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid white;
+}
+/* to stop image overflow */
+.project_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image_overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.image_button {
+  font-size: large;
+  background-color: #00ff00;
+  color: black;
+  border: none;
+  padding: 0.5em 1em;
+  font-weight: bold;
+  border-radius: 5px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.image_wrapper2:hover .image_overlay {
+  opacity: 1;
+}
+
+.image_wrapper2:hover .image_button {
+  transform: translateY(0);
+  opacity: 1;
+}

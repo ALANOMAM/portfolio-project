@@ -1,48 +1,26 @@
-// import "./App.css";
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">hello</header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-import { useEffect, useState } from "react";
-import axios from "axios";
-import "./App.css";
+import React from "react";
+import Header from "./components/Header";
+import { Routes, Route, Link } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import AiPage from "./pages/AiPage";
+import FullStackPage from "./pages/FullStackPage";
+import BlockchainPage from "./pages/BlockchainPage";
 
 function App() {
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8081/api/projects")
-      .then((response) => {
-        setProjects(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching projects:", error);
-      });
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">My Projects</header>
+    <div>
+      {/* header where the navigation links are */}
+      <Header />
 
-      <div className="project-list">
-        {projects.map((project) => (
-          <div key={project.id} className="project-card">
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <small>
-              Created at: {new Date(project.created_at).toLocaleDateString()}
-            </small>
-          </div>
-        ))}
-      </div>
+      {/* Route definitions */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/ai" element={<AiPage />} />
+        <Route path="/full-stack" element={<FullStackPage />} />
+        <Route path="/blockchain" element={<BlockchainPage />} />
+      </Routes>
     </div>
   );
 }

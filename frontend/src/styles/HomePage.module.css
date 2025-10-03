@@ -1,0 +1,94 @@
+body {
+  font-family: "Share Tech Mono", monospace;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(270deg, black, gray, black);
+  background-size: 600% 600%;
+  animation: moveBackground 20s ease infinite;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* INTRO MESSAGE */
+.intro_info {
+  position: relative;
+
+  border-bottom: 4px lawngreen solid;
+  border-right: 2px lawngreen solid;
+  max-width: 85%;
+  top: 10vh;
+  left: 10%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+
+/* SOCIALS */
+.socials {
+  max-width: 40%;
+  position: relative;
+  top: 15vh;
+  left: 10%;
+
+  display: flex;
+  gap: 10px;
+}
+
+/* IMAGE AND FADE */
+.imageWrapper {
+  position: relative;
+  left: 0%;
+  top: 20vh;
+  width: fit-content;
+
+  display: flex;
+  justify-content: center;
+}
+
+/* The image itself */
+.profileImage {
+  border-right: 2px lawngreen solid;
+  border-bottom: 2px lawngreen solid;
+  display: block;
+  width: 50%;
+  height: auto;
+}
+
+/* The gradient overlay */
+.imageWrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 40%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.09) 100%
+  );
+  pointer-events: none;
+}
+
+/* responsive, when in pc form i want these quntities to change */
+@media screen and (min-width: 1024px) {
+  .imageWrapper {
+    left: 50%;
+    top: -20vh;
+  }
+
+  .intro_info {
+    max-width: 40%;
+  }
+}
