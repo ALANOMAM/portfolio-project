@@ -51,7 +51,12 @@ function Projects() {
                   {project.title}
                 </span>
               }
-              subTitle="frontend, backend, the two"
+              // subTitle={project.technologies}
+              subTitle={
+                project.technologies?.length
+                  ? project.technologies.map((tech) => tech.name).join(", ")
+                  : "No technologies"
+              }
               header={header}
               //   className={`${styles.project_card} w-full sm:w-80 md:w-96`}
               //   className={`${styles.project_card} md:w-25rem`}

@@ -29,9 +29,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($projects as $project)
+                    @foreach ($projects as $project)
                         <tr class="border-t">
-                            <td class="py-2">{{ $project->title }}</td>
+                            <td class="py-2">
+                                {{ $project->title }}
+                                <ul class="text-sm text-gray-600">
+                                    @foreach ($project->technologies as $tech)
+                                        <li>- {{ $tech->name }}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
                             <td class="py-2 text-center">
                                 <a href="{{ route('projects.show', $project) }}" class="text-blue-600 hover:underline">View</a> |
                                 <a href="{{ route('projects.edit', $project) }}" class="text-yellow-500 hover:underline">Edit</a> |
@@ -42,9 +49,7 @@
                                 </form>
                             </td>
                         </tr>
-                    @empty
-                        <tr><td colspan="2" class="py-4">No projects found.</td></tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>
