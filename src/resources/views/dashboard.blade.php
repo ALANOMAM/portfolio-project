@@ -12,6 +12,8 @@
                     {{ __("You're logged in!") }}
 
                     <a href="{{ route('projects.index') }}" class="btn btn-primary">Go to projects</a>  
+                    <a href="{{ route('companies.index') }}" class="btn btn-primary">Go to companies</a>  
+                    <a href="{{ route('technologies.index') }}" class="btn btn-primary">Go to technologies</a>  
                 </div>
             </div>
         </div>

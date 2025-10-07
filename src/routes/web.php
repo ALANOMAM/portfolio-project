@@ -1,6 +1,9 @@
 <?php
+
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TechnologyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +21,12 @@ Route::middleware('auth')->group(function () {
 
     //project routes
      Route::resource('projects', ProjectController::class);
+
+    //company routes
+    Route::resource('companies', CompanyController::class); 
+
+    //technology routes
+    Route::resource('technologies', TechnologyController::class);
 });
 
 require __DIR__.'/auth.php';
