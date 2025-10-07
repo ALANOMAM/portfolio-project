@@ -12,7 +12,10 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+
+        $technologies = Technology::all();
+
+        return view('technologies.index', compact('technologies'));
     }
 
     /**
@@ -20,7 +23,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('technologies.create');
     }
 
     /**
@@ -28,7 +31,17 @@ class TechnologyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+    $validated = $request->validate([
+    'name' => 'required|string|max:255',
+    ]);
+
+     Technology::create([
+        'name' => $validated['name'],
+    ]);
+
+    return redirect()->route('technologies.index')->with('success', 'technology added.');
+
     }
 
     /**
@@ -36,7 +49,7 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        //
+        return view('technologies.show', compact('technology'));
     }
 
     /**
@@ -44,7 +57,7 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        //
+        return view('technologies.edit', compact('technology'));
     }
 
     /**
@@ -52,7 +65,17 @@ class TechnologyController extends Controller
      */
     public function update(Request $request, Technology $technology)
     {
-        //
+
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
+
+    // Update main technology fields
+    $technology->update([
+        'name' => $validated['name'],
+    ]);
+
+    return redirect()->route('technologies.index')->with('success', 'technology updated.');
     }
 
     /**
@@ -60,6 +83,7 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+     $technology->delete();
+    return redirect()->route('technologies.index')->with('success', 'technology deleted.');
     }
 }
