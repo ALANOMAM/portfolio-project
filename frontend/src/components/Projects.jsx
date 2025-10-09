@@ -17,6 +17,8 @@ function Projects() {
       });
   }, []);
 
+  console.log("PROJECTS", projects);
+
   return (
     <>
       <div className="card flex flex-wrap gap-4 justify-content-center mt-3">
@@ -25,7 +27,7 @@ function Projects() {
             <div className={styles.image_wrapper2}>
               <img
                 alt="Card"
-                src="projects.jpeg"
+                src={`http://localhost:9000/portfolio/${project.image}`}
                 className={styles.project_image}
               />
               <div className={styles.image_overlay}>
@@ -63,6 +65,18 @@ function Projects() {
               className={`${styles.project_card}  w-25rem sm:w-80 md:w-96`}
             >
               <p>{project.description}</p>
+
+              {/* video start */}
+              {project.video && (
+                <video controls width="100%" className="mt-2 rounded shadow">
+                  <source
+                    src={`http://localhost:9000/portfolio/${project.video}`}
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+              {/* video end */}
             </Card>
           );
         })}

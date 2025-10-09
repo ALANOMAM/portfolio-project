@@ -30,7 +30,7 @@ Route::post('/login', function (Request $request) {
 });
 
 //Public routes, get access to projects from postman or any other frontend WITHOUT AUTHENTCATION
-  Route::apiResource('projects', ProjectApiController::class);
+  Route::apiResource('projects', ProjectApiController::class)->only(['index', 'show']);
 
 //Protected routes, get access to projects from postman or any other frontend WITH AUTHENTICATION
 Route::middleware('auth:sanctum')->group(function () {

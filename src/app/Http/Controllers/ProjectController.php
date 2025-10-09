@@ -7,7 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -69,13 +69,15 @@ class ProjectController extends Controller
     ]);
 
     if ($request->hasFile('image')) {
-    $path = $request->file('image')->store('project_images', 'public');
+    $path = $request->file('image')->store('project_images', ['disk' => 'minio','visibility' => 'public']);   
+    logger()->info("Image stored at: " . $path); // log info at "storage/logs/laravel.log" 
     $project->image = $path;
     }
 
     if ($request->hasFile('video')) {
-        $path = $request->file('video')->store('project_videos', 'public');
-        $project->video = $path;
+    $path = $request->file('video')->store('project_videos', ['disk' => 'minio','visibility' => 'public']);
+    logger()->info("Video stored at: " . $path); // log info at "storage/logs/laravel.log"       
+    $project->video = $path;
     }
 
     $project->save();
@@ -84,7 +86,6 @@ class ProjectController extends Controller
     if ($request->has('technologies')) {
         $project->technologies()->attach($request->input('technologies'));
     }
-
 
     return redirect()->route('projects.index')->with('success', 'Project created.');
     }
@@ -148,15 +149,21 @@ public function update(Request $request, Project $project)
         'project_link' => $validated['project_link'] ?? null,
     ]);
 
-    // Image (optional)
+    // Replace image, if the user uploaads a new image the old MinIO image will be deleted
     if ($request->hasFile('image')) {
-        $path = $request->file('image')->store('project_images', 'public');
+        if ($project->image) {
+        Storage::disk('minio')->delete($project->image);
+        }
+        $path = $request->file('image')->store('project_images', ['disk' => 'minio', 'visibility' => 'public']);
         $project->image = $path;
     }
 
-    // Video (optional)
+    // Replace video, if the user uploaads a new image the old MinIO video will be deleted
     if ($request->hasFile('video')) {
-        $path = $request->file('video')->store('project_videos', 'public');
+        if ($project->video) {
+            Storage::disk('minio')->delete($project->video);
+        }
+        $path = $request->file('video')->store('project_videos', ['disk' => 'minio', 'visibility' => 'public']);
         $project->video = $path;
     }
 
@@ -177,8 +184,18 @@ public function update(Request $request, Project $project)
    //Even if a user guesses a project ID in the URL, they shouldn't be able to view or modify others' projects.     
         if ($project->user_id !== Auth::id()) {
           abort(403); // Forbidden
-         }        
-            $project->delete();
+         }
+
+  //When deleting a project, clean up the associated image files from MinIO       
+        if ($project->image) {
+            Storage::disk('minio')->delete($project->image);
+        }
+  //When deleting a project, clean up the associated video files from MinIO 
+        if ($project->video) {
+            Storage::disk('minio')->delete($project->video);
+        }
+
+     $project->delete();
     return redirect()->route('projects.index')->with('success', 'Project deleted.');
     }
 }

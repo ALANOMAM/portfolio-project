@@ -52,4 +52,4 @@ Open [http://localhost:8081](http://localhost:8081) to view it in your browser.
 
 ## 9-To start all the app containers including bootsrap
 
-### `docker compose up -d --build server php mysql vite frontend`
+### `docker compose up -d --build server php mysql vite frontend minio mc`
