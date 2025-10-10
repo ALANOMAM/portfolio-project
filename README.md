@@ -19,9 +19,21 @@
     DB_USERNAME=projects-api
     DB_PASSWORD=secret
 
+## 3-Still in the .env at the bottom fix the minio connection inside
+
+    FILESYSTEM_DISK=minio
+
+    AWS_ACCESS_KEY_ID=minioadmin
+    AWS_SECRET_ACCESS_KEY=minioadmin
+    AWS_DEFAULT_REGION=us-east-1
+    AWS_BUCKET=portfolio
+    AWS_ENDPOINT=http://minio:9000
+    AWS_URL=http://localhost:9000/portfolio
+    AWS_USE_PATH_STYLE_ENDPOINT=true
+
 ## 3-Start the app containers, except bootstrap
 
-### `docker compose up -d --build server php mysql`
+### `docker compose up -d  server php mysql minio mc --build`
 
 ## 4-Fix possible permission issues with the app containers still up
 
@@ -33,9 +45,9 @@
 
 ### `docker compose exec php php artisan key:generate`
 
-## 6-Enter the php conatiner and run the migrations
+## 6-Enter the php conatiner and run the migrations and seeds
 
-### `docker compose exec php php artisan migrate`
+### `docker compose exec php php artisan migrate:refresh --seed`
 
 ## 7-Set up the boostrap part and install node_modules folder
 
@@ -43,8 +55,19 @@
 
 ### `docker compose up -d vite`
 
-The app runs in the development mode.\
+The laravel app runs in the development mode.\
 Open [http://localhost:8081](http://localhost:8081) to view it in your browser.
+
+Minio runs in the development mode.\
+Open [http://localhost:9001/login](http://localhost:9001/login) to view it in your browser.
+
+## 7-Install the node modules inside frontend folder
+
+### `docker-compose run --rm npm-frontend npm install`
+
+## 7-Start frontend container
+
+### `docker compose up -d frontend --build`
 
 ## 8-To stop all the app containers
 
