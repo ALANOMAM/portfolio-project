@@ -32,25 +32,25 @@
     AWS_URL=http://localhost:9000/portfolio
     AWS_USE_PATH_STYLE_ENDPOINT=true
 
-## 3-Start the app containers, except bootstrap
+## 4-Start the backend(without bootstrap) and minio containers
 
 ### `docker compose up -d  server php mysql minio mc --build`
 
-## 4-Fix possible permission issues with the app containers still up
+## 5-Fix possible permission issues with the app containers still up
 
 ### `docker compose exec php chmod -R 775 storage bootstrap/cache`
 
 ### `docker compose exec php chown -R www-data:www-data storage bootstrap/cache`
 
-## 5-Generate the app key with the app containers still up
+## 6-Generate the app key with the app containers still up
 
 ### `docker compose exec php php artisan key:generate`
 
-## 6-Enter the php conatiner and run the migrations and seeds
+## 7-Enter the php conatiner and run the migrations and seeds
 
 ### `docker compose exec php php artisan migrate:refresh --seed`
 
-## 7-Set up the boostrap part and install node_modules folder
+## 8-Set up the boostrap part and install node_modules folder
 
 ### `docker compose run --rm npm install`
 
@@ -62,18 +62,21 @@ Open [http://localhost:8081](http://localhost:8081) to view it in your browser.
 Minio runs in the development mode.\
 Open [http://localhost:9001/login](http://localhost:9001/login) to view it in your browser.
 
-## 7-Install the node modules inside frontend folder
+## 9-Install the node modules inside frontend folder
 
-### `docker-compose run --rm npm-frontend npm install`
+### `docker compose run --rm npm-frontend npm install`
 
-## 7-Start frontend container
+## 10-Start frontend container
 
 ### `docker compose up -d frontend --build`
 
-## 8-To stop all the app containers
+React runs in the development mode.\
+Open [http://localhost:3000/](http://localhost:3000/) to view it in your browser.
+
+## 11-To stop all the app containers
 
 ### `docker compose down`
 
-## 9-To start all the app containers including bootsrap
+## 12-To start all the app containers including bootsrap
 
 ### `docker compose up -d --build server php mysql vite frontend minio mc`
