@@ -1,8 +1,9 @@
 # ✨ Brief description
 
-- This project is a simple api that exposes a list of projects to any frontend available
-
-- This project uses breez for authentication, once in, one can make CRUD operations on projects providing title and description.
+- This project is a my portfolio project
+- On backend i use laravel as an api to generate and expose projects, companies ecc that will be fetched by frontend
+- This project uses breez for authentication, once in, one can make CRUD operations on projects and other resources.
+- On frontend side i used react.js ad three.js to expose and my fetched data.
 
 # ⚙️ Setup Instructions
 
