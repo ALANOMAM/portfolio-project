@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Api\ProjectApiController;
+use App\Http\Controllers\Api\CompanyApiController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +30,11 @@ Route::post('/login', function (Request $request) {
     ]);
 });
 
-//Public routes, get access to projects from postman or any other frontend WITHOUT AUTHENTCATION
+//Public routes, get access to resources (projects, companies etc) from postman or any other frontend WITHOUT AUTHENTCATION
   Route::apiResource('projects', ProjectApiController::class)->only(['index', 'show']);
+  Route::apiResource('companies', CompanyApiController::class)->only(['index', 'show']);
 
-//Protected routes, get access to projects from postman or any other frontend WITH AUTHENTICATION
+//Protected routes, get access to resources (projects, companies etc) from postman or any other frontend WITH AUTHENTICATION
 Route::middleware('auth:sanctum')->group(function () {
     // Route::apiResource('projects', ProjectApiController::class);
 });

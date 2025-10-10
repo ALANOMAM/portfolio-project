@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
@@ -47,7 +48,8 @@ class CompanyController extends Controller
     ]);
 
     if ($request->hasFile('logo')) {
-    $path = $request->file('logo')->store('company_images', 'public');
+    $path = $request->file('logo')->store('company_images', ['disk' => 'minio','visibility' => 'public']);
+    logger()->info("Company image stored at: " . $path); // log info at "storage/logs/laravel.log" 
     $company->logo = $path;
     }
 
@@ -104,9 +106,14 @@ class CompanyController extends Controller
         'website' => $validated['website'] ?? null,
     ]);
 
-    // logo (optional)
+    // Replace image, if the user uploaads a new image the old MinIO image will be deleted
     if ($request->hasFile('logo')) {
-        $path = $request->file('logo')->store('company_images', 'public');
+
+        if ($company->logo) {
+        Storage::disk('minio')->delete($company->logo);
+        }
+
+        $path = $request->file('logo')->store('company_images', ['disk' => 'minio', 'visibility' => 'public']);
         $company->logo = $path;
     }
 
@@ -123,7 +130,13 @@ class CompanyController extends Controller
    //Even if a user guesses a company ID in the URL, they shouldn't be able to view or modify others' companies.     
         if ($company->user_id !== Auth::id()) {
           abort(403); // Forbidden
-         }        
+         } 
+         
+  //When deleting a company, clean up the associated image files from MinIO       
+        if ($company->logo) {
+            Storage::disk('minio')->delete($company->logo);
+        }
+
             $company->delete();
     return redirect()->route('companies.index')->with('success', 'company deleted.');
     

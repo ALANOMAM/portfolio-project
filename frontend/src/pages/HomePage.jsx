@@ -1,5 +1,6 @@
 import styles from "../styles/HomePage.module.css";
 import Element from "../components/Element";
+import Companies from "../components/Companies";
 import "primeicons/primeicons.css";
 
 function HomePage() {
@@ -50,9 +51,11 @@ function HomePage() {
       </div>
 
       {/* my image */}
-      <div className={styles.imageWrapper}>
+      {/* <div className={styles.imageWrapper}>
         <img src="/alan.png" alt="alan-image" className={styles.profileImage} />
-      </div>
+      </div> */}
+
+      <Companies />
     </>
   );
 }

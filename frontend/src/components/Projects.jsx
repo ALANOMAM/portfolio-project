@@ -17,7 +17,7 @@ function Projects() {
       });
   }, []);
 
-  console.log("PROJECTS", projects);
+  // console.log("PROJECTS", projects);
 
   return (
     <>

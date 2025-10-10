@@ -81,6 +81,16 @@ body {
   pointer-events: none;
 }
 
+/* CLIENTS */
+.title {
+  color: lawngreen;
+  text-align: center;
+}
+
+.clients_container {
+  margin-top: 200px;
+}
+
 /* responsive, when in pc form i want these quntities to change */
 @media screen and (min-width: 1024px) {
   .imageWrapper {
