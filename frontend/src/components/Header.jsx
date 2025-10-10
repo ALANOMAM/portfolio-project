@@ -34,6 +34,11 @@ function Header() {
           icon: "pi pi-ethereum",
           command: () => navigate("/blockchain"),
         },
+        {
+          label: "DevOps",
+          icon: "pi pi-ethereum",
+          command: () => navigate("/devops"),
+        },
       ],
     },
   ];

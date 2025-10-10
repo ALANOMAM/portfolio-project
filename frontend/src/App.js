@@ -6,6 +6,7 @@ import AboutPage from "./pages/AboutPage";
 import AiPage from "./pages/AiPage";
 import FullStackPage from "./pages/FullStackPage";
 import BlockchainPage from "./pages/BlockchainPage";
+import DevOpsPage from "./pages/DevOpsPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/ai" element={<AiPage />} />
         <Route path="/full-stack" element={<FullStackPage />} />
         <Route path="/blockchain" element={<BlockchainPage />} />
+        <Route path="/devops" element={<DevOpsPage />} />
       </Routes>
     </div>
   );
