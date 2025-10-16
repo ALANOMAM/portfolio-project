@@ -9,7 +9,7 @@
 
 ## 1-When inside the project add the "vendor" folder by running run
 
-### `docker compose run --rm composer install`
+### `docker compose -f docker-compose.dev.yml run --rm composer install`
 
 ## 2-Add the .env file inside the src folder and fix the database connection inside
 
@@ -34,27 +34,27 @@
 
 ## 4-Start the backend(without bootstrap) and minio containers
 
-### `docker compose up -d  server php mysql minio mc --build`
+### `docker compose -f docker-compose.dev.yml up -d  server php mysql minio mc --build`
 
-## 5-Fix possible permission issues with the app containers still up
+## 5-Fix possible php permission issues with the app containers still up
 
-### `docker compose exec php chmod -R 775 storage bootstrap/cache`
+### `chmod -R 775 storage bootstrap/cache`
 
-### `docker compose exec php chown -R www-data:www-data storage bootstrap/cache`
+### `chown -R www-data:www-data storage bootstrap/cache`
 
 ## 6-Generate the app key with the app containers still up
 
-### `docker compose exec php php artisan key:generate`
+### `php artisan key:generate`
 
 ## 7-Enter the php conatiner and run the migrations and seeds
 
-### `docker compose exec php php artisan migrate:refresh --seed`
+### `php artisan migrate:refresh --seed`
 
 ## 8-Set up the boostrap part and install node_modules folder
 
-### `docker compose run --rm npm install`
+### `docker compose -f docker-compose.dev.yml run --rm npm install`
 
-### `docker compose up -d vite`
+### `docker compose -f docker-compose.dev.yml up -d vite`
 
 The laravel app runs in the development mode.\
 Open [http://localhost:8081](http://localhost:8081) to view it in your browser.
@@ -64,11 +64,11 @@ Open [http://localhost:9001/login](http://localhost:9001/login) to view it in yo
 
 ## 9-Install the node modules inside frontend folder
 
-### `docker compose run --rm npm-frontend npm install`
+### `docker compose -f docker-compose.dev.yml run --rm npm-frontend npm install`
 
 ## 10-Start frontend container
 
-### `docker compose up -d frontend --build`
+### `docker compose -f docker-compose.dev.yml up -d frontend --build`
 
 React runs in the development mode.\
 Open [http://localhost:3000/](http://localhost:3000/) to view it in your browser.
@@ -79,4 +79,6 @@ Open [http://localhost:3000/](http://localhost:3000/) to view it in your browser
 
 ## 12-To start all the app containers including bootsrap
 
-### `docker compose up -d --build server php mysql vite frontend minio mc`
+### `docker compose -f docker-compose.dev.yml up -d --build server php mysql vite frontend minio mc`
+
+### `docker compose -f docker-compose.dev.yml restart server php mysql vite frontend minio mc`
