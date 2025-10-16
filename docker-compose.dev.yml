@@ -16,7 +16,7 @@ services:
   server:
     build:
       context: .
-      dockerfile: dockerfiles/nginx.dockerfile
+      dockerfile: dockerfiles/nginx.dev.dockerfile # use dev nginx dockerfile
     ports:
       - 8081:80
     volumes:
