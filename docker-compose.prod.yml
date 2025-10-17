@@ -31,9 +31,7 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./src:/var/www/html
-    ports:
-      - "5173:5173" # <-- expose Vite's dev server port
-    command: ["npm", "run", "dev"]
+    command: ["npm", "run", "build"]
 
   frontend:
     build:
@@ -59,7 +57,7 @@ services:
     volumes:
       - minio_data:/data
 
-  #Here in my entry point amongs other things i make minio public
+  #Here in my entry point amongst other things i make minio public
   #so that i can fetch my image and video to expose to laravel view after being saved
   mc:
     image: minio/mc
