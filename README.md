@@ -11,7 +11,7 @@
 
 ### `docker compose -f docker-compose.dev.yml run --rm composer install`
 
-## 2-Add the .env file inside the src folder and fix the database connection inside
+## 2-Add the .env file inside the laravel src folder and fix the database connection inside
 
     DB_CONNECTION=mysql
     DB_HOST=mysql
@@ -20,7 +20,7 @@
     DB_USERNAME=projects-api
     DB_PASSWORD=secret
 
-## 3-Still in the .env at the bottom fix the minio connection inside
+## 3-Still in the .env inside the laravel src folder at the bottom fix the minio connection inside
 
     FILESYSTEM_DISK=minio
 
@@ -31,6 +31,11 @@
     AWS_ENDPOINT=http://minio:9000
     AWS_URL=http://localhost:9000/portfolio
     AWS_USE_PATH_STYLE_ENDPOINT=true
+
+## 3-IN the .env inside the frontend react folder add this for urls
+
+    REACT_APP_API_URL=http://localhost:8081/api
+    REACT_APP_ASSET_URL=http://localhost:9000/portfolio
 
 ## 4-Start the backend(without bootstrap) and minio containers
 

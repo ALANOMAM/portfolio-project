@@ -31,7 +31,7 @@ function Companies() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8081/api/companies")
+      .get(`${apiUrl}/companies`)
       .then((response) => {
         setCompanies(response.data);
       })
@@ -53,7 +53,7 @@ function Companies() {
         <div className="mb-3">
           {company.logo ? (
             <img
-              src={`http://localhost:9000/portfolio/${company.logo}`}
+              src={`${assetUrl}/${company.logo}`}
               alt={company.name}
               style={{
                 maxHeight: "200px",

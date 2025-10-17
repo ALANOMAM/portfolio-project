@@ -8,7 +8,7 @@ function Projects({ categoryIdProp }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8081/api/projects")
+      .get(`${apiUrl}/projects`)
       .then((response) => {
         setProjects(response.data);
       })
@@ -17,7 +17,7 @@ function Projects({ categoryIdProp }) {
       });
   }, []);
 
-  console.log("PROJECTS", projects);
+  // console.log("PROJECTS", projects);
 
   return (
     <>
@@ -29,7 +29,7 @@ function Projects({ categoryIdProp }) {
               <div className={styles.image_wrapper2}>
                 <img
                   alt="Card"
-                  src={`http://localhost:9000/portfolio/${project.image}`}
+                  src={`${assetUrl}/${project.image}`}
                   className={styles.project_image}
                 />
                 <div className={styles.image_overlay}>
@@ -71,7 +71,7 @@ function Projects({ categoryIdProp }) {
                 {project.video && (
                   <video controls className={styles.video_container}>
                     <source
-                      src={`http://localhost:9000/portfolio/${project.video}`}
+                      src={`${assetUrl}/${project.video}`}
                       type="video/mp4"
                     />
                     Your browser does not support the video tag.
