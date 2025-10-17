@@ -4,6 +4,8 @@ import { Card } from "primereact/card";
 import styles from "../styles/WorkPagesStyle.module.css";
 
 function Projects({ categoryIdProp }) {
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const assetUrl = process.env.REACT_APP_ASSET_URL;
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {

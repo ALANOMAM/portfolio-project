@@ -5,6 +5,8 @@ import axios from "axios";
 import styles from "../styles/HomePage.module.css";
 
 function Companies() {
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const assetUrl = process.env.REACT_APP_ASSET_URL;
   const [companies, setCompanies] = useState([]);
   const responsiveOptions = [
     {
