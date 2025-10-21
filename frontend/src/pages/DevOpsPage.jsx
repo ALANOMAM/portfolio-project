@@ -8,7 +8,7 @@ function DevOpsPage() {
   return (
     <div>
       <h1 className={styles.title}>DevOps Projects</h1>
-      <Projects categoryIdProp={category} />
+      <Projects categoryIdProp={category} showComingSoonIfEmpty={true} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Card } from "primereact/card";
 import styles from "../styles/WorkPagesStyle.module.css";
 
-function Projects({ categoryIdProp }) {
+function Projects({ categoryIdProp, showComingSoonIfEmpty = false }) {
   const apiUrl = process.env.REACT_APP_API_URL;
   const assetUrl = process.env.REACT_APP_ASSET_URL;
   const [projects, setProjects] = useState([]);
@@ -19,14 +19,18 @@ function Projects({ categoryIdProp }) {
       });
   }, []);
 
-  // console.log("PROJECTS", projects);
+  console.log("PROJECTS", projects);
+
+  const filteredProjects = projects.filter(
+    (project) => project.category_id == categoryIdProp
+  );
 
   return (
-    <>
-      <div className="card flex flex-wrap gap-4 justify-content-center mt-3">
-        {projects.map((project) => {
-          // ONLY RETURNS THE PROJECT THAT MATCHES A SPECIFIC CATEGORY ID START
-          if (project.category_id == categoryIdProp) {
+    <div className="card flex flex-wrap gap-4 justify-content-center mt-3 ">
+      {
+        // ONLY RETURNS THE PROJECT THAT MATCHES A SPECIFIC CATEGORY ID START
+        filteredProjects.length > 0 ? (
+          filteredProjects.map((project) => {
             const header = (
               <div className={styles.image_wrapper2}>
                 <img
@@ -35,7 +39,18 @@ function Projects({ categoryIdProp }) {
                   className={styles.project_image}
                 />
                 <div className={styles.image_overlay}>
-                  <button className={styles.image_button}>View</button>
+                  {/* If i pass a go to link then the button to view appears START */}
+                  {project.project_link && (
+                    <button
+                      className={styles.image_button}
+                      onClick={() =>
+                        window.open(project.project_link, "_blank")
+                      }
+                    >
+                      View
+                    </button>
+                  )}
+                  {/* If i pass a go to link then the button to view appears END */}
                 </div>
               </div>
             );
@@ -63,13 +78,10 @@ function Projects({ categoryIdProp }) {
                     : "No technologies"
                 }
                 header={header}
-                //   className={`${styles.project_card} w-full sm:w-80 md:w-96`}
-                //   className={`${styles.project_card} md:w-25rem`}
-                className={`${styles.project_card}  w-25rem sm:w-80 md:w-96`}
+                className={`${styles.project_card} w-25rem sm:w-80 md:w-96`}
               >
                 <p>{project.description}</p>
 
-                {/* video start */}
                 {project.video && (
                   <video controls className={styles.video_container}>
                     <source
@@ -79,14 +91,18 @@ function Projects({ categoryIdProp }) {
                     Your browser does not support the video tag.
                   </video>
                 )}
-                {/* video end */}
               </Card>
             );
-          }
-          // ONLY RETURNS THE PROJECT THAT MATCHES A SPECIFIC CATEGORY ID END
-        })}
-      </div>
-    </>
+          })
+        ) : // ONLY RETURNS THE PROJECT THAT MATCHES A SPECIFIC CATEGORY ID END
+        showComingSoonIfEmpty ? (
+          <div className={styles.coming_soon}>
+            <h2>🚧 Coming Soon</h2>
+            <p> Working on awesome projects. Stay tuned!</p>
+          </div>
+        ) : null
+      }
+    </div>
   );
 }
 

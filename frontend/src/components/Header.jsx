@@ -1,6 +1,7 @@
 import React from "react";
 import { Menubar } from "primereact/menubar";
 import { useNavigate } from "react-router-dom";
+import styles from "../styles/Header.module.css";
 
 function Header() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function Header() {
       command: () => navigate("/"),
     },
     {
-      label: "About",
+      label: "About me",
       icon: "pi pi-info-circle",
       command: () => navigate("/about"),
     },
@@ -45,7 +46,7 @@ function Header() {
 
   return (
     <div className="card">
-      <Menubar model={items} />
+      <Menubar model={items} unstyled={false} className={styles.test} />
     </div>
   );
 }

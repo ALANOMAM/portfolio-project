@@ -8,7 +8,7 @@ function BlockchainPage() {
   return (
     <div>
       <h1 className={styles.title}>Blockchain Projects</h1>
-      <Projects categoryIdProp={category} />
+      <Projects categoryIdProp={category} showComingSoonIfEmpty={true} />
     </div>
   );
 }

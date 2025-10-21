@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 
 // Theme (choose one from node_modules/primereact/resources/themes/)
 import "primereact/resources/themes/saga-blue/theme.css"; // or vela, arya, etc.
+import "primereact/resources/themes/lara-dark-indigo/theme.css"; //for dark themes
 
 // Core CSS (required)
 import "primereact/resources/primereact.min.css";

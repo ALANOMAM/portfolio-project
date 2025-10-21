@@ -7,14 +7,20 @@
   border-top: 3px solid lawngreen;
   border-bottom: 3px solid lawngreen;
 }
-
-.project_card {
-  /* border: 2px solid lawngreen; */
+.coming_soon {
   color: white;
+}
+.project_card {
+  /* border: 2px solid red; */
+  border-radius: 10px;
+  color: white;
+  background-color: black;
   display: flex;
   flex-direction: column;
-  /* align-items: start; */
   gap: 15px;
+  padding: 10px;
+
+  box-shadow: 0 0 10px lawngreen;
 }
 /* to stop text overflow */
 .project_card p {
@@ -79,5 +85,8 @@
 .video_container {
   width: 100%;
   height: 200px;
+
+  border: 4px solid white;
+
   /* object-fit: cover; */
 }

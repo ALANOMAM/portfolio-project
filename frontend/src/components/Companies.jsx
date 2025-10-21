@@ -42,7 +42,7 @@ function Companies() {
       });
   }, []);
 
-  //   console.log("COMAPANIES", companies);
+  // console.log("COMAPANIES", companies);
 
   const companyTemplate = (company) => {
     return (
@@ -80,6 +80,7 @@ function Companies() {
             <Button
               icon="pi pi-eye"
               className="p-button-success p-button-rounded"
+              onClick={() => window.open(company.website, "_blank")}
             />
           </div>
         </div>
@@ -89,7 +90,7 @@ function Companies() {
 
   return (
     <div className={`card ${styles.clients_container}`}>
-      <h2 className={styles.title}>Clients</h2>
+      <h2 className={styles.title}>I HAVE COLLABORATED WITH</h2>
       <Carousel
         value={companies}
         numVisible={3}
@@ -100,11 +101,31 @@ function Companies() {
         autoplayInterval={3000}
         itemTemplate={companyTemplate}
         pt={{
+          previousButton: {
+            style: {
+              width: "50px",
+              height: "50px",
+              backgroundColor: "lawngreen",
+              border: "none",
+            },
+          },
+          nextButton: {
+            style: {
+              width: "50px",
+              height: "50px",
+              backgroundColor: "lawngreen",
+              border: "none",
+            },
+          },
           previousButtonIcon: {
-            style: { color: "lawnGreen" },
+            style: {
+              color: "black",
+            },
           },
           nextButtonIcon: {
-            style: { color: "lawnGreen" },
+            style: {
+              color: "black",
+            },
           },
           indicatorButton: ({ context }) => ({
             style: {

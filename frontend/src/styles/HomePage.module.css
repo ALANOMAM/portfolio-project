@@ -1,13 +1,15 @@
 body {
   font-family: "Share Tech Mono", monospace;
+  line-height: 1.5;
   height: 100vh;
   margin: 0;
-  background: linear-gradient(270deg, black, gray, black);
+  background-color: black;
+  /* background: linear-gradient(270deg, black, gray, black);
   background-size: 600% 600%;
-  animation: moveBackground 20s ease infinite;
+  animation: moveBackground 20s ease infinite; */
 }
 
-@keyframes moveBackground {
+/* @keyframes moveBackground {
   0% {
     background-position: 0% 50%;
   }
@@ -17,11 +19,11 @@ body {
   100% {
     background-position: 0% 50%;
   }
-}
+} */
 /* INTRO MESSAGE */
 .intro_info {
   position: relative;
-
+  background-color: black;
   border-bottom: 4px lawngreen solid;
   border-right: 2px lawngreen solid;
   max-width: 85%;
@@ -45,10 +47,17 @@ body {
   gap: 10px;
 }
 
+.socials i {
+  background-color: black;
+}
+
 /* CLIENTS */
 .title {
   color: lawngreen;
   text-align: center;
+  background-color: black;
+  width: fit-content; /* the h2 is only as wide as the text inside */
+  margin: 0 auto; /* center the element horizontally */
 }
 
 .clients_container {

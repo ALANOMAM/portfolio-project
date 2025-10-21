@@ -7,23 +7,27 @@ import AiPage from "./pages/AiPage";
 import FullStackPage from "./pages/FullStackPage";
 import BlockchainPage from "./pages/BlockchainPage";
 import DevOpsPage from "./pages/DevOpsPage";
+import MatrixBackground from "./components/MatrixBackground";
 
 function App() {
   return (
-    <div>
-      {/* header where the navigation links are */}
-      <Header />
+    <>
+      <MatrixBackground />
+      <div>
+        {/* header where the navigation links are */}
+        <Header />
 
-      {/* Route definitions */}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/ai" element={<AiPage />} />
-        <Route path="/full-stack" element={<FullStackPage />} />
-        <Route path="/blockchain" element={<BlockchainPage />} />
-        <Route path="/devops" element={<DevOpsPage />} />
-      </Routes>
-    </div>
+        {/* Route definitions */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/ai" element={<AiPage />} />
+          <Route path="/full-stack" element={<FullStackPage />} />
+          <Route path="/blockchain" element={<BlockchainPage />} />
+          <Route path="/devops" element={<DevOpsPage />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 
